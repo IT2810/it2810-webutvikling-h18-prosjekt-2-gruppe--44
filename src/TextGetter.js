@@ -39,22 +39,22 @@ class TextGetter extends React.Component {
 
     selectRandomText(category) {
         let haiku = [
-            "/text/haiku/buson.json",
-            "/text/haiku/matsuo.json",
-            "/text/haiku/shiki.json",
-            "/text/haiku/soseki.json"
+            "/media/text/haiku/buson.json",
+            "/media/text/haiku/matsuo.json",
+            "/media/text/haiku/shiki.json",
+            "/media/text/haiku/soseki.json"
         ];
         let music = [
-            "/text/music/macarena.json",
-            "/text/music/safety_dance.json",
-            "/text/music/stupid_hoe.json",
-            "/text/music/we_built_this_city.json"
+            "/media/text/music/macarena.json",
+            "/media/text/music/safety_dance.json",
+            "/media/text/music/stupid_hoe.json",
+            "/media/text/music/we_built_this_city.json"
         ];
         let poems = [
-            "/text/poems/garborg.json",
-            "/text/poems/hagerup.json",
-            "/text/poems/overland.json",
-            "/text/poems/vinje.json"
+            "/media/text/poems/garborg.json",
+            "/media/text/poems/hagerup.json",
+            "/media/text/poems/overland.json",
+            "/media/text/poems/vinje.json"
         ];
         switch (category) {
             case "haiku":

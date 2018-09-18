@@ -9,11 +9,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {src: song1};
-    this.changeSource = this.changeSource.bind(this);
+    this.changeSource = this.changeAudioSource.bind(this);
     this.child = React.createRef();
   }
 
-  changeSource() {
+  changeAudioSource() {
     this.setState({src: song2});
     this.child.current.reloadPlayer();
   }
@@ -28,7 +28,7 @@ class App extends Component {
 
         <div>
           <AudioFile src={this.state.src} ref={this.child} />
-          <button onClick={this.changeSource}>Change song</button>
+          <button onClick={this.changeAudioSource}>Change song</button>
         </div>
       </div>
     );

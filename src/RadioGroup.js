@@ -30,7 +30,7 @@ class TextRadio extends React.Component {
     render() {
         return (
             <div>
-                <div>
+                <div class="categories">
                     <h1>Text</h1>
                     <form>
                         <input type="radio" name="text" value="haiku" onChange={this.checkedButton}/>Haiku

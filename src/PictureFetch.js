@@ -44,13 +44,24 @@ class PictureFetch extends React.Component {
   }
 
   selectRandom(category) {
-    let book = ["/pics/book/1.svg", "/pics/book/2.svg", "/pics/book/3.svg"];
+    let book = [
+      "/pics/book/1.svg",
+      "/pics/book/2.svg",
+      "/pics/book/3.svg",
+      "/pics/book/4.svg"
+    ];
     let iphone = [
       "/pics/iphone/1.svg",
       "/pics/iphone/2.svg",
-      "/pics/iphone/3.svg"
+      "/pics/iphone/3.svg",
+      "/pics/iphone/4.svg"
     ];
-    let mac = ["/pics/mac/1.svg", "/pics/mac/2.svg", "/pics/mac/3.svg"];
+    let mac = [
+      "/pics/mac/1.svg",
+      "/pics/mac/2.svg",
+      "/pics/mac/3.svg",
+      "/pics/mac/4.svg"
+    ];
     switch (category) {
       case "book":
         return book[Math.floor(Math.random() * book.length)];

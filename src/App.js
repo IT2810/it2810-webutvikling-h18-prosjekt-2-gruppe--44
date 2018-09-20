@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Tabs from './Tabs';
 import Categories from './Categories';
 import TextGetter from './TextGetter';
+import PictureFetch from './PictureFetch';
 import './App.css';
 
 class App extends Component {
@@ -49,6 +50,7 @@ class App extends Component {
           <p>textCategory: {this.state.textCategory}</p>
           <p>audioCategory: {this.state.audioCategory}</p>
 
+          <PictureFetch category={this.state.imageCategory} />
           <TextGetter category={this.state.textCategory} />
 
           <audio id="audio" ref="audio" controls autoPlay loop>

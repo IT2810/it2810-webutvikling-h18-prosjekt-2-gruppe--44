@@ -16,6 +16,12 @@ class TextGetter extends React.Component {
         this.fetchText(this.selectRandomText(this.props.category));
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.category !== prevProps.category) {
+            this.fetchText(this.selectRandomText(this.props.category));
+        }
+    }
+
     fetchText(url) {
         if (url) {
             fetch(url)
@@ -73,10 +79,6 @@ class TextGetter extends React.Component {
         const {error, isLoaded, text, author, category} = this.state;
         if(error) {
             return <div>Error: {error.message}</div>;
-        } else if (this.props.category.localeCompare(category)) {
-            this.setState({category: this.props.category});
-            this.fetchText(this.selectRandomText(this.props.category));
-            return <div>Loading for reals...</div>
         } else if (!isLoaded) {
             return <div>Loading...</div>
         } else {

@@ -2,55 +2,63 @@ import React from "react";
 
 class PictureFetch extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      content: "",
-      width: 24,
-      height: 24,
-      viewBox: "0 0 24 24"
-    };
-  }
-  componentDidMount() {
-    let request = new XMLHttpRequest();
-    request.open("GET", this.props.src);
-    request.setRequestHeader("Content-Type", "image/svg+xml");
-    let that = this;
-    request.addEventListener("load", function(event) {
-      let response = event.target.responseText;
-      let doc = new DOMParser();
-      let xml = doc.parseFromString(response, "image/svg+xml");
-      if (xml.firstChild.nodeName !== "svg") {
-        console.error(that.props.src + " is not a valid svg file.");
-        return false;
-      }
-      let viewBox = xml.firstChild.getAttribute("viewBox");
-      viewBox = viewBox ? viewBox.split(" ") : "";
-      let width = xml.firstChild.getAttribute("width") || viewBox[2] || 24;
-      let height = xml.firstChild.getAttribute("height") || viewBox[3] || 24;
-      viewBox = viewBox
-        ? viewBox.join(" ")
-        : ("0 0 " + width + " " + height).replace(/px/g, "");
-      that.setState({
-        content: xml.firstChild.innerHTML,
-        width,
-        height,
-        viewBox
-      });
-    });
-    console.log("hi");
-    request.send();
-    console.log("h4");
-    console.log(request.readyState);
-  }
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            text: [],
+            author: "",
+            category: this.props.category
+        };
+    }
+
+    componentDidMount() {
+        console.info("Is this being called?");
+        this.fetchText(this.selectRandomText(this.props.category));
+    }
+
+    fetchText(url) {
+        if (url) {
+            fetch(url)
+                .then(res => res.text())
+                .then(
+                    (result) => {
+                      const val = result.text()
+                      this.setState({
+                            isLoaded: true,
+                            text: val,
+                            author: result.author
+                        });
+                    }, (error) => {
+                        this.setState({
+                            isLoaded: true,
+                            error
+                        });
+                    }
+                )
+        }
+    }
 
   selectRandom(category) {
-    let book = ["/pics/book/1.svg", "/pics/book/2.svg", "/pics/book/3.svg"];
+    let book = [
+      "/pics/book/1.svg",
+      "/pics/book/2.svg",
+      "/pics/book/3.svg",
+      "/pics/book/4.svg"
+    ];
     let iphone = [
       "/pics/iphone/1.svg",
       "/pics/iphone/2.svg",
-      "/pics/iphone/3.svg"
+      "/pics/iphone/3.svg",
+      "/pics/iphone/4.svg"
     ];
-    let mac = ["/pics/mac/1.svg", "/pics/mac/2.svg", "/pics/mac/3.svg"];
+    let mac = [
+      "/pics/mac/1.svg",
+      "/pics/mac/2.svg",
+      "/pics/mac/3.svg",
+      "/pics/mac/4.svg"
+    ];
+    
     switch (category) {
       case "book":
         return book[Math.floor(Math.random() * book.length)];
@@ -64,13 +72,26 @@ class PictureFetch extends React.Component {
   }
 
   render() {
-    return React.createElement("svg", {
-      className: this.props.className,
-      viewBox: this.state.viewBox,
-      width: this.state.width,
-      height: this.state.height,
-      dangerouslySetInnerHTML: { __html: this.state.content }
-    });
+    const {error, isLoaded, text, author, category} = this.state;
+      if(error) {
+          return <div>Error: {error.message}</div>;
+      } else if (this.props.category.localeCompare(category)) {
+          this.setState({category: this.props.category});
+          this.fetchText(this.selectRandomText(this.props.category));
+          return <div>Loading for reals...</div>
+      } else if (!isLoaded) {
+          return <div>Loading...</div>
+      } else {
+          return (
+              <div>
+                  <p>Author: {author}</p>
+                  <pre>
+                      {text.join("\n")}
+                  </pre>
+              </div>
+          );
+      }
+  document.querrySelector(".svgFile");
   }
 }
 export default PictureFetch;

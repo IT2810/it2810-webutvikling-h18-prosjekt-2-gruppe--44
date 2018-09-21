@@ -18,44 +18,17 @@ class PictureRadio extends React.Component {
     });
   };
 
-  checkedPictureButton = event => {
-    this.setState({
-      pic: event.currentTarget.value
-    });
-    this.picture.current.reloadPlayer();
-  };
-
   render() {
     return (
       <div>
-        <div>
-          <h2>Text</h2>
-          <form>
-            <input
-              type="radio"
-              name="Picture"
-              value="book"
-              onChange={this.checkedButton}
-            />
-            Book
-            <input
-              type="radio"
-              name="Picture"
-              value="iphone"
-              onChange={this.checkedButton}
-            />
-            Iphone
-            <input
-              type="radio"
-              name="Picture"
-              value="mac"
-              onChange={this.checkedButton}
-            />
-            Mac
-          </form>
-          <PictureFetch category={this.state.category} />
-        </div>
-      </div>
+                    <h1>Image</h1>
+                    <form>
+                        <input type="radio" name="pic" value="book" onChange={this.checkedButton}/>Book
+                        <input type="radio" name="pic" value="iphone" onChange={this.checkedButton}/>iPhone
+                        <input type="radio" name="pic" value="mac" onChange={this.checkedButton}/>Mac
+                    </form>
+                    <PictureFetch category={this.state.category} />
+                </div>
     );
   }
 }

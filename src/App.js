@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PictureFetch from "./PictureFetch";
+import PictureFetch from './PictureFetch'
 import "./App.css";
 
 class App extends Component {
@@ -9,11 +9,13 @@ class App extends Component {
         <span>
           <div id="main" />
           <h4>hi</h4>
-          <div classname= "svgFile" dangerouslySetInnerHTML={{__html: this.props.svg}}/></div>
         </span>
       </div>
     );
   }
+
+
 }
+
 
 export default App;

@@ -6,28 +6,26 @@ class PictureFetch extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            text: [],
-            author: "",
-            category: this.props.category
+            text: []
         };
     }
 
-    componentDidMount() {
-        console.info("Is this being called?");
-        this.fetchText(this.selectRandomText(this.props.category));
-    }
+   // componentDidMount() {
+   //     console.info("Is this being called?");
+   //     this.fetchText(this.selectRandomText(this.props.category));
+   // }
 
     fetchText(url) {
+        console.log(url)
         if (url) {
-            fetch(url)
+            fetch("./pics/" +url + "/1.svg")
                 .then(res => res.text())
+                .catch(error => console.log(error))
                 .then(
                     (result) => {
-                      const val = result.text()
                       this.setState({
                             isLoaded: true,
-                            text: val,
-                            author: result.author
+                            text: result
                         });
                     }, (error) => {
                         this.setState({
@@ -36,62 +34,59 @@ class PictureFetch extends React.Component {
                         });
                     }
                 )
+                .catch(error => {
+                    console.log(error)
+                })
         }
     }
 
   selectRandom(category) {
     let book = [
-      "/pics/book/1.svg",
-      "/pics/book/2.svg",
-      "/pics/book/3.svg",
-      "/pics/book/4.svg"
+      "./pics/book/1"
     ];
     let iphone = [
-      "/pics/iphone/1.svg",
-      "/pics/iphone/2.svg",
-      "/pics/iphone/3.svg",
-      "/pics/iphone/4.svg"
+      "./pics/iphone/1"
     ];
     let mac = [
-      "/pics/mac/1.svg",
-      "/pics/mac/2.svg",
-      "/pics/mac/3.svg",
-      "/pics/mac/4.svg"
+      "./pics/mac/1"
     ];
     
     switch (category) {
       case "book":
-        return book[Math.floor(Math.random() * book.length)];
+        return book;
       case "iphone":
-        return iphone[Math.floor(Math.random() * iphone.length)];
+        return iphone;
       case "mac":
-        return mac[Math.floor(Math.random() * mac.length)];
+        return mac;
       default:
         return;
     }
   }
 
-  render() {
-    const {error, isLoaded, text, author, category} = this.state;
-      if(error) {
-          return <div>Error: {error.message}</div>;
-      } else if (this.props.category.localeCompare(category)) {
-          this.setState({category: this.props.category});
-          this.fetchText(this.selectRandomText(this.props.category));
-          return <div>Loading for reals...</div>
-      } else if (!isLoaded) {
-          return <div>Loading...</div>
-      } else {
-          return (
-              <div>
-                  <p>Author: {author}</p>
-                  <pre>
-                      {text.join("\n")}
-                  </pre>
-              </div>
-          );
+  componentDidUpdate(prevprops) {
+      if(this.props !== prevprops)
+      {
+        this.fetchText(this.selectRandom(this.props.category));
       }
-  document.querrySelector(".svgFile");
   }
+
+  render() {
+    const {error, isLoaded, text, category} = this.state;
+    if(error) {
+        return <div>Error: {error.message}</div>;
+    } else if (this.props.category && !isLoaded) {
+
+        return <div>Loading...</div>
+    } else if (!this.props.category) {
+        return <div>Choose a Picture</div>
+    } else {
+        return (
+            <div>
+                {this.state.text}  
+            </div>
+            
+        );
+    }
+}
 }
 export default PictureFetch;

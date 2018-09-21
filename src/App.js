@@ -6,6 +6,25 @@ import TextLoader from './components/loaders/TextLoader';
 import AudioLoader from './components/loaders/AudioLoader';
 import './App.css';
 
+import Song8bit1 from './audio/8-bit/137227__dirtyjewbs__8-bit-loop.mp3';
+import Song8bit2 from './audio/8-bit/223235__dambient__8-bit-loop.mp3';
+import Song8bit3 from './audio/8-bit/265308__volvion__8-bit-bossfight.mp3';
+import Song8bit4 from './audio/8-bit/277363__nyan-cat__8bit-race-music.mp3';
+
+import SongDrums1 from './audio/drums/58136__the-bizniss__ae-drum-loop-pt-1.mp3';
+import SongDrums2 from './audio/drums/130579__drumhead62__live-groove-big-room-drums.mp3';
+import SongDrums3 from './audio/drums/173138__godspine__chorus-drums-120.mp3';
+import SongDrums4 from './audio/drums/329863__xcwm__sns-drums.mp3';
+
+import SongParty1 from './audio/party/94590__zgump__tr-loop-0501.mp3';
+import SongParty2 from './audio/party/110267__nandoo1__nandoo-messany-flying-over-the-top-epic.mp3';
+import SongParty3 from './audio/party/369823__greek555__sample-128-bpm.mp3';
+import SongParty4 from './audio/party/402895__edemson86__edm-loop-lead.mp3';
+
+var songs8bit = [Song8bit1, Song8bit2, Song8bit3, Song8bit4];
+var songsDrums = [SongDrums1, SongDrums2, SongDrums3, SongDrums4];
+var songsParty = [SongParty1, SongParty2, SongParty3, SongParty4];
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +32,7 @@ class App extends Component {
       imageCategory: "book",
       textCategory: "haiku",
       audioCategory: "8-bit",
-      music: "",
+      audioSource: Song8bit1,
       activeTabIndex: 0,
       tabClass0: "selected",
       tabClass2: "",
@@ -21,22 +40,32 @@ class App extends Component {
       tabClass3: ""
     };
 
-    this.musicChild = React.createRef();
+    this.child = React.createRef();
     this.handleClickedTab = this.handleClickedTab.bind(this);
   }
 
-  handleClickedTab(e, index) {
-    if(index != this.state.activeTabIndex) {
+  handleClickedTab(index) {
+    if(index !== this.state.activeTabIndex) {
       this.setState({activeTabIndex: index});
+      this.setAudioSource();
+      this.child.current.reloadPlayer();
 
-      if(index == 0) {
-        this.setState({tabClass0: "selected", tabClass1: "", tabClass2: "", tabClass3: ""});
-      } else if(index == 1) {
-        this.setState({tabClass0: "", tabClass1: "selected", tabClass2: "", tabClass3: ""});
-      } else if(index == 2) {
-        this.setState({tabClass0: "", tabClass1: "", tabClass2: "selected", tabClass3: ""});
-      } else if(index == 3) {
-        this.setState({tabClass0: "", tabClass1: "", tabClass2: "", tabClass3: "selected"});
+      switch (index) {
+          case 0 :
+              this.setState({tabClass0: "selected", tabClass1: "", tabClass2: "", tabClass3: ""});
+
+              break;
+          case 1 :
+              this.setState({tabClass0: "", tabClass1: "selected", tabClass2: "", tabClass3: ""});
+              break;
+          case 2 :
+              this.setState({tabClass0: "", tabClass1: "", tabClass2: "selected", tabClass3: ""});
+              break;
+          case 3 :
+              this.setState({tabClass0: "", tabClass1: "", tabClass2: "", tabClass3: "selected"});
+              break;
+          default :
+              break;
       }
     }
   }
@@ -53,12 +82,33 @@ class App extends Component {
       });
   };
 
+  setAudioSource() {
+
+    let bitSong = songs8bit[this.state.activeTabIndex];
+    let drumSong = songsDrums[this.state.activeTabIndex];
+    let partySong = songsParty[this.state.activeTabIndex];
+
+    switch(this.state.audioCategory) {
+      case '8-bit' :
+        this.setState({audioSource: bitSong});
+        break;
+      case 'drums':
+        this.setState({audioSource: drumSong});
+        break;
+      case 'party':
+        this.setState({audioSource: partySong});
+        break;
+      default :
+        break;
+    }
+  }
+
   audioRadioButtonChanged = event => {
       this.setState({
           audioCategory: event.currentTarget.value
       });
-
-      this.musicChild.current.reloadPlayer();
+      this.setAudioSource();
+      this.child.current.reloadPlayer();
   };
 
   render() {
@@ -71,17 +121,9 @@ class App extends Component {
         imageRadioButtonChanged={this.imageRadioButtonChanged} />
 
         <div id="content" className="content">
-          <p>imageCategory: {this.state.imageCategory}</p>
-          <p>textCategory: {this.state.textCategory}</p>
-          <p>audioCategory: {this.state.audioCategory}</p>
-
           <PictureLoader category={this.state.imageCategory} />
           <TextLoader category={this.state.textCategory} />
-
-          <audio id="audio" ref="audio" controls autoPlay loop>
-            <source src={this.props.src} type="audio/mpeg"></source>
-            Your browser does not support the audio tag.
-          </audio>
+          <AudioLoader src={this.state.audioSource} ref={this.child} />
         </div>
       </div>
     );

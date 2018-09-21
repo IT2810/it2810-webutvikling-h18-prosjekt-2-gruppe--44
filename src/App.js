@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Tabs from './Tabs';
-import Categories from './Categories';
-import TextGetter from './TextGetter';
-import PictureFetch from './PictureFetch';
+import Tabs from './components/Tabs';
+import Categories from './components/Categories';
+import PictureLoader from './components/loaders/PictureLoader';
+import TextLoader from './components/loaders/TextLoader';
+import AudioLoader from './components/loaders/AudioLoader';
 import './App.css';
 
 class App extends Component {
@@ -33,7 +34,8 @@ class App extends Component {
       this.setState({
           audioCategory: event.currentTarget.value
       });
-      //this.musicChild.current.reloadPlayer();
+
+      this.musicChild.current.reloadPlayer();
   };
 
   render() {
@@ -50,8 +52,8 @@ class App extends Component {
           <p>textCategory: {this.state.textCategory}</p>
           <p>audioCategory: {this.state.audioCategory}</p>
 
-          <PictureFetch category={this.state.imageCategory} />
-          <TextGetter category={this.state.textCategory} />
+          <PictureLoader category={this.state.imageCategory} />
+          <TextLoader category={this.state.textCategory} />
 
           <audio id="audio" ref="audio" controls autoPlay loop>
             <source src={this.props.src} type="audio/mpeg"></source>

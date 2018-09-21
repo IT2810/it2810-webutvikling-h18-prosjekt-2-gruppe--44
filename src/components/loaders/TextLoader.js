@@ -1,6 +1,6 @@
 import React from 'react';
 
-class TextGetter extends React.Component {
+class TextLoader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -93,4 +93,4 @@ class TextGetter extends React.Component {
         }
     }
 }
-export default TextGetter;
+export default TextLoader;

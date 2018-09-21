@@ -40,27 +40,36 @@ class PictureFetch extends React.Component {
         }
     }
 
-  selectRandom(category) {
-    let book = [
-      "./pics/book/1"
-    ];
-    let iphone = [
-      "./pics/iphone/1"
-    ];
-    let mac = [
-      "./pics/mac/1"
-    ];
+    selectRandom(category) {
+        let book = [
+          "/pics/book/1",
+          "/pics/book/2",
+          "/pics/book/3",
+          "/pics/book/4"
+        ];
+        let iphone = [
+          "/pics/iphone/1",
+          "/pics/iphone/2",
+          "/pics/iphone/3",
+          "/pics/iphone/4"
+        ];
+        let mac = [
+          "/pics/mac/1",
+          "/pics/mac/2",
+          "/pics/mac/3",
+          "/pics/mac/4"
+        ];
     
-    switch (category) {
-      case "book":
-        return book;
-      case "iphone":
-        return iphone;
-      case "mac":
-        return mac;
-      default:
-        return;
-    }
+        switch (category) {
+            case "book":
+              return book[Math.floor(Math.random() * book.length)];
+            case "iphone":
+              return iphone[Math.floor(Math.random() * iphone.length)];
+            case "mac":
+              return mac[Math.floor(Math.random() * mac.length)];
+            default:
+              return;
+          }
   }
 
   componentDidUpdate(prevprops) {

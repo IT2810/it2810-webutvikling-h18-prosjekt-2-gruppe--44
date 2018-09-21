@@ -32,3 +32,5 @@ PictureLoader laster tilfeldige bilder fra tre kategorier. Hver gang en bruker k
 Det er tre kategorier for bilder og tekst og tre lydstyper. Kategoriene for bilder er book, iphone og mac. For tekst er kategoriene haiku, poem og music og de tre kategoriene for 8-bit, drums og party.
 
 Det er 4 faner på nettsiden. Hver fane har alle de samme funksjonene, men brukeren kan ha forskjellige kategorier aktive på hver tab.
+
+Oppsettet av nettstedet på en PC vil ha 4 faner på toppen, valgknappen for radio buttons på høyre side og innholdet på midtsiden. På en mobil vil nettsiden være responsiv og tilpasset til skjermen på telefonen.

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AudioFile extends React.Component {
+class AudioLoader extends React.Component {
   reloadPlayer() {
     this.refs.audio.pause();
     this.refs.audio.load();
@@ -19,4 +19,4 @@ class AudioFile extends React.Component {
   }
 }
 
-export default AudioFile;
+export default AudioLoader;

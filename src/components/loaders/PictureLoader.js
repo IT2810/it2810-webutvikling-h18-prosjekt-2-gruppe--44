@@ -1,6 +1,6 @@
 import React from "react";
 
-class PictureFetch extends React.Component {
+class PictureLoader extends React.Component {
   constructor(props) {
         super(props);
         this.state = {
@@ -84,4 +84,4 @@ class PictureFetch extends React.Component {
       }
   }
 }
-export default PictureFetch;
+export default PictureLoader;

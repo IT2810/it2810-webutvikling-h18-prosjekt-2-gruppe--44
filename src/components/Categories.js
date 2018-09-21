@@ -6,15 +6,15 @@ class Categories extends React.Component {
       <div className="categories">
         <div>
           <div className="header">Image</div>
-          <div><input defaultChecked type="radio" value="books" name="image" id="image1" onChange={this.props.imageRadioButtonChanged}></input>
+          <div><input defaultChecked type="radio" value="book" name="image" id="image1" onChange={this.props.imageRadioButtonChanged}></input>
           <label htmlFor="image1">Books</label>
           </div>
           <div>
-            <input type="radio" value="iPhones" name="image" id="image2" onChange={this.props.imageRadioButtonChanged}></input>
+            <input type="radio" value="iphone" name="image" id="image2" onChange={this.props.imageRadioButtonChanged}></input>
             <label htmlFor="image2">iPhones</label>
           </div>
           <div>
-            <input type="radio" value="macs" name="image" id="image3" onChange={this.props.imageRadioButtonChanged}></input>
+            <input type="radio" value="mac" name="image" id="image3" onChange={this.props.imageRadioButtonChanged}></input>
             <label htmlFor="image3">Macs</label>
           </div>
         </div>

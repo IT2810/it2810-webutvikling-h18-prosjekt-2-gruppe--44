@@ -1,17 +1,13 @@
 import React from 'react';
 
 class Tabs extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return(
       <div className="tabs">
-        <button onClick={(e) => this.props.onClick(e, 0)} class={this.props.tabClass0}>Tab 1</button>
-        <button onClick={(e) => this.props.onClick(e, 1)} class={this.props.tabClass1}>Tab 2</button>
-        <button onClick={(e) => this.props.onClick(e, 2)} class={this.props.tabClass2}>Tab 3</button>
-        <button onClick={(e) => this.props.onClick(e, 3)} class={this.props.tabClass3}>Tab 4</button>
+        <button onClick={() => this.props.onClick(0)} className={this.props.tabClass0}>Tab 1</button>
+        <button onClick={() => this.props.onClick(1)} className={this.props.tabClass1}>Tab 2</button>
+        <button onClick={() => this.props.onClick(2)} className={this.props.tabClass2}>Tab 3</button>
+        <button onClick={() => this.props.onClick(3)} className={this.props.tabClass3}>Tab 4</button>
       </div>
     );
   }

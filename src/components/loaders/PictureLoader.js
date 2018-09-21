@@ -6,7 +6,7 @@ class PictureLoader extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            text: "",
+            text: ""
         };
     }
 
@@ -21,13 +21,11 @@ class PictureLoader extends React.Component {
     }
 
     fetchText(url) {
-    console.log(url)
         if (url) {
             fetch(url)
                 .then(res => res.text())
                 .then(
                     (result) => {
-                      console.log(result);
                       this.setState({
                             isLoaded: true,
                             text: result
@@ -77,9 +75,8 @@ class PictureLoader extends React.Component {
       } else if (!isLoaded) {
           return <div>Loading...</div>
       } else {
-          console.log("SVG: " + text);
           return (
-              <div>{text}</div>
+              <div dangerouslySetInnerHTML={{__html: text}} />
           );
       }
   }

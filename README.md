@@ -15,7 +15,9 @@ I denne oppgaven har vi blant annet brukt arrow functions.
 En fordel med arrow functions er at **this** beholder sin verdi utenfor sitt scope. Dette gjør at man kan man feks kan bruke **this** i arrow-funksjoner på samme måte som i java.
 
 #### Fetch og Promises
-Vi tok også i bruk promises gjennom Fetch-api. Fetch metoden tar en URL som argument og returnerer et Promise som løses til en Response.
+Vi tok også i bruk promises gjennom Fetch-api. 
+TextLoader og PictureLoader-komponente bruker fetch og promise for å hente tekst i JSON-format og SVG i xml-format asynkront fra webserveren.
+Fetch metoden tar en URL som argument og returnerer et Promise som løses til en Response. 
 
 Siden JavaScript kun kjører i en enkelt tråd, er ikke concurrency mulig i JS. Det vil si at flere deler av et script ikke kan kjøre samtidig. 
 
@@ -24,8 +26,8 @@ Med promises kan man kjøre asyncrone kall, uten at man er sikker på om de vil 
 Et Promise kan være i en av tre tilstander.
 
 * **Pending**: Promise ennå ikke avgjort, for eksempel ett HTTP-kall som ikke har returnert. Fra denne tilstanden kan et promise gå til tilstanden **fulfilled** eller **rejected**.
-* **Fulfilled**: Promise ble utfrørt som lovet med en verdi som resultat. For eksempel et GET HTTP-kall som returnerer med 200 status kode.
-* **Rejected**: Promise ble ikke utført som lovet. For eksempel et HTTP-kall som returnerer med 500 status kode. Resultatet blir satt til et error-objekt.
+* **Fulfilled**: Promise ble utfrørt som lovet med en verdi som resultat. For eksempel et GET HTTP-kall som returnerer med 200 status kode. I TextLoader er value en JSON hvor verdiene author og text blir satt i state.
+* **Rejected**: Promise ble ikke utført som lovet. For eksempel et HTTP-kall som returnerer med 500 status kode. Resultatet blir satt til et error-objekt. Her oppdateres state med at det har skjedd en feil og feilmeldingen rendres i stedet for bilde eller tekst.
 
 ### React
 React er et JavaScript-bibliotek, som er utviklet og vedlikeholdt av Facebook i tillegg til et open source community.
@@ -45,7 +47,7 @@ JSX er en kombinasjon av XML/HTML og JavaScript som gjør det enkelt å definere
 Hver gang et komponent blir oppdatert, blir det gjort et kall til render-metoden komponent-objektet. Denne metoden returnerer JSX som transpileres til javascript og oppdaterer DOM-elementet i siden.
 
 ##### Props
-Brukes for å sende data mellom foreldre- og barne-komponenter. Dette kan være funksjoner som en foreldre sender til barnet, som barnet for eksempel kan kalle ved en event, eller en variabel med en verdi som foreldre-komponenten vil sende til barnet.
+Brukes for å sende data mellom foreldre- og barne-komponenter. Dette kan være funksjoner som en foreldre sender til barnet, som barnet for eksempel kan kalle ved en event, eller en variabel med en verdi som foreldre-komponenten vil sende til barnet. Vi brukte props til å sende funksjoner ned til Categories som ble kallet ved events i Categories-komponenten.
 
 ##### State
 I motsetning til props som blir sendt til komponentet, mens state behandles inne i componentet.
@@ -61,6 +63,8 @@ Disse funksjonene kalles når et komponent blir instansiert og satt inn i DOM
 3. render()
 4. componentDidMount()
 
+Vi brukte componentDidMount til å gjøre et ajax-kall ved første rendering av TextLoader og PictureLoader
+
 ###### Oppdatering
 Disse blir forårsaket av endring i props eller state
 1. static getDerivedStateFromProps()
@@ -69,10 +73,11 @@ Disse blir forårsaket av endring i props eller state
 4. getSnapshotBeforeUpdate()
 5. componentDidUpdate()
 
+Vi brukte ComponentDidUpdate for å sjekke om props hadde forandret seg i forhold til forrige update. Dette ble gjort ved å sammenligne forrige props med nye props.
+
 ###### Unmounting
 Kalles når komponentet blir fjernet fra DOM
 1. componentWillUnmount()
 
 ###### Feilhåndtering
 Kalles når det oppstår feil under rendering.
-

@@ -7,8 +7,7 @@ class TextLoader extends React.Component {
             error: null,
             isLoaded: false,
             text: [],
-            author: "",
-            category: this.props.category
+            author: ""
         };
     }
 
@@ -76,7 +75,7 @@ class TextLoader extends React.Component {
     }
 
     render() {
-        const {error, isLoaded, text, author, category} = this.state;
+        const {error, isLoaded, text, author} = this.state;
         if(error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
